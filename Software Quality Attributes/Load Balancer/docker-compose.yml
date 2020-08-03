@@ -1,0 +1,96 @@
+version: "3.2"
+services:
+  php-apache:
+    image: php:apache
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - ./M3:/var/www/html/
+    ports:
+      - "8083:80"
+    container_name: php-app0
+  php1:
+    build: ./M1
+    volumes:
+    - ./M1/www:/var/www/html
+    networks:
+      - frontend
+      - backend
+    environment:
+      - MYSQL_HOST=mysql-app1
+      - MYSQL_USER=user1
+      - MYSQL_PASSWORD=passw1
+      - MYSQL_DB=db1
+    ports:
+      - "8081:80"
+    container_name: php-app1
+  mysql1:
+    image: mysql:5.7
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=user1
+      - MYSQL_PASSWORD=passw1 
+      - MYSQL_DATABASE=db1
+    container_name: mysql-app1
+  phpmyadmin1:
+    image: phpmyadmin/phpmyadmin:4.7
+    depends_on:
+      - mysql1
+    networks:
+      - backend
+    ports:
+      - "30001:80"
+    environment:
+      - PMA_HOST=mysql-app1
+      - PMA_PORT= 3306
+    volumes:
+      - /sessions
+    container_name: phpmyadmin-app1
+
+  
+  php2:
+    build: ./M2
+    volumes:
+      - ./M2/www/:/var/www/html/
+    networks:
+      - frontend
+      - backend
+    environment:
+      - MYSQL_HOST=mysql-app2
+      - MYSQL_USER=user1
+      - MYSQL_PASSWORD=passw1
+      - MYSQL_DB=db1
+    
+    ports:
+      - "8082:80"
+    container_name: php-app2
+  mysql2:
+    image: mysql:5.7
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=user1
+      - MYSQL_PASSWORD=passw1 
+      - MYSQL_DATABASE=db1
+    container_name: mysql-app2
+  phpmyadmin2:
+    image: phpmyadmin/phpmyadmin:4.7
+    depends_on:
+      - mysql2
+    networks:
+      - backend
+    ports:
+      - "32002:80"
+    environment:
+      - PMA_HOST=mysql-app2
+      - PMA_PORT= 3306
+    volumes:
+      - /sessions
+    container_name: phpmyadmin-app2
+networks:
+  frontend:
+  backend:  

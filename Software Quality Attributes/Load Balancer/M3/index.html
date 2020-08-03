@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            console.log("inside script");
+            $('.button').click(function() {
+                var clickBtnValue = $(this).val();
+                var ajaxurl = 'http://localhost:8083/index.php',
+                    data = {
+                        'action': clickBtnValue,
+                        'num1': $("#num1").val(),
+                        'num2': $("#num2").val(),
+                        'str1': $('#str1').val(),
+                        'str2': $('#str2').val()
+                    };
+                $.post(ajaxurl, data, function(response) {
+                    // Response div goes here.
+                    $("#result").text(response);
+                    // alert("action performed successfully" + response);
+                });
+            });
+        });
+    </script>
+</head>
+<style>
+    div {
+        width: 500px;
+        height: 300px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border-style: solid;
+        border-width: 2px;
+        padding: 40px;
+        background-color: grey;
+    }
+    
+    body {
+        background-color: #A9A9A9;
+    }
+</style>
+
+<body>
+    <h1>
+        String and Mathematical Calculator
+    </h1>
+    <div>
+        Number 1 -
+        <input type="number" name="num1" id=num1><br> Number 2 -
+        <input type="number" name="num2" id=num2><br>
+        <tr>
+            <!-- create button and assign value to each button -->
+            <!-- dis("1") will call function dis to display value -->
+            <td><input type="submit" class="button" name="Add" value="Add" /> </td>
+            <td><input type="submit" class="button" name="Subtract" value="Subtract" /> </td>
+            <td><input type="submit" class="button" name="Multiply" value="Multiply" /> </td>
+            <td><input type="submit" class="button" name="Divide" value="Divide" /> </td>
+
+
+        </tr>
+        <br>
+        <tr>
+            <!-- create button and assign value to each button -->
+            <!-- dis("1") will call function dis to display value -->
+            <td><input type="submit" class="button" name="Sin" value="Sin" /> </td>
+            <td><input type="submit" class="button" name="Cos" value="Cos" /> </td>
+            <td><input type="submit" class="button" name="Tan" value="Tan" /> </td>
+
+
+        </tr>
+        <br>
+        <p id="result"></p>
+
+        String 1 -
+        <input type="text" name="str1" id=str1><br> String 2 -
+        <input type="text" name="str2" id=str2><br>
+        <tr>
+            <!-- create button and assign value to each button -->
+            <!-- dis("1") will call function dis to display value -->
+            <td><input type="submit" class="button" name="Concatenate" value="Concatenate" /> </td>
+            <td><input type="submit" class="button" name="Reverse" value="Reverse" /> </td>
+            <td><input type="submit" class="button" name="String Length" value="StringLength" /> </td>
+            <td><input type="submit" class="button" name="Word Count" value="WordCount" /> </td>
+
+
+        </tr>
+
+    </div>
+
+</body>
+
+</html>

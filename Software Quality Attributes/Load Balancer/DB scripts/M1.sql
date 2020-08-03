@@ -1,0 +1,8 @@
+CREATE TABLE Calculator (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        num1 DOUBLE NOT NULL,
+        num2 DOUBLE,
+        operator DOUBLE NOT NULL,
+        result DOUBLE NOT NULL,
+        reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        );

@@ -1,0 +1,8 @@
+CREATE TABLE Strings (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        string1 VARCHAR(30) NOT NULL,
+        string2 VARCHAR(30),
+        operator DOUBLE NOT NULL,
+        result VARCHAR(30) NOT NULL,
+        reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        );
